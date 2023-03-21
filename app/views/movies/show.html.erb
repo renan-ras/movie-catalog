@@ -1,0 +1,35 @@
+<strong>Título: </strong>
+<%= @movie.title %><br>
+
+<strong>Diretor: </strong>
+<%= @movie.director.name %><br>
+
+<strong>Ano de lançamento: </strong>
+<%= @movie.release_year %><br>
+
+<strong>Sinopse: </strong>
+<%= @movie.synopsis %><br>
+
+<strong>País de origem: </strong>
+<%= @movie.origin_country %><br>
+
+<strong>Duração (min): </strong>
+<%= @movie.duration %><br>
+
+<strong>Gênero favorito: </strong>
+<%= @movie.genre.name %><br>
+
+<strong>Capa do filme: </strong><br>
+  <% if @movie.cover.attached? %>
+    <%= image_tag @movie.cover, style: "width: 200px; display: block" %>
+  <% else %>
+    <%= '(Imagem não existente)' %><br>
+  <% end %>
+
+<br>
+<div style="display: inline-block; margin-right: 10px;">
+  <%= button_to 'Editar', edit_movie_path(@movie), method: :get %>
+</div>
+<div style="display: inline-block;">
+  <%= button_to 'Apagar', movie_path(@movie), method: :delete %>
+</div><br><br>

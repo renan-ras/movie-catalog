@@ -1,0 +1,29 @@
+<h1>Registro de gênero de filme</h1>
+
+<p>
+
+<% flash.each do |type, message| %>
+  <div class="alert alert-<%= type %>">
+    <%= message %>
+  </div>
+<% end %>
+<br>
+
+<%= form_with model: genre do |f|%>
+
+  <%= f.label :name, 'Gênero:' %>
+  <%= f.text_field :name %>
+  <br><br>
+  <%= f.submit 'Salvar' %>
+
+<%end%>
+
+<br>
+Gêneros cadastrados:
+<br>
+<% Genre.all.each do |genre|  %>
+
+<%= link_to genre.name, genre %><br>
+
+<%end%>
+</p>

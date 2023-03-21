@@ -1,0 +1,59 @@
+<h1>Registro de filme</h1>
+<br>
+
+<% flash.each do |type, message| %>
+  <div class="alert alert-<%= type %>">
+    <%= message %>
+  </div>
+<% end %>
+<br>
+
+<%= form_with model: movie do |f| %>
+
+  <%= f.label 'Título:' %>
+  <%= f.text_field :title %>
+  <br><br>
+
+  <%= f.label 'Diretor:' %>
+  <%= f.collection_select :director_id, Director.all, :id, :name %>
+  <br><br>
+
+  <%= f.label 'Ano de lançamento:' %>
+  <%= f.number_field :release_year %>
+  <br><br>
+
+  <%= f.label 'Sinopse:' %>
+  <%= f.text_area :synopsis %>
+  <br><br>
+
+  <%= f.label 'País de origem:' %>
+  <%= f.text_field :origin_country %>
+  <br><br>
+
+  <%= f.label 'Duração (min):' %>
+  <%= f.number_field :duration %>
+  <br><br>
+
+  <%= f.label 'Gênero:' %>
+  <%= f.collection_select :genre_id, Genre.all, :id, :name %>
+  <br><br>
+
+  <%= f.label 'Capa do filme:' %><br>
+  <% if movie.cover.attached? %>
+    <%= image_tag movie.cover, style: "width: 200px; display: block" %>
+  <% end %>
+
+  <br>
+  <%= f.file_field :cover %>
+  <br><br>
+
+  <%= f.submit 'Salvar' %>
+
+<%end%>
+
+<br>
+Filmes cadastrados:
+<br>
+<% Movie.all.each do |movie|  %>
+<%= link_to "#{movie.title} (#{movie.release_year})", movie %><br>
+<%end%>

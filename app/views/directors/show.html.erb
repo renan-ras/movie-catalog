@@ -1,0 +1,26 @@
+
+<strong>Nome: </strong>
+<%=@director.name%><br>
+
+<strong>Data de Nascimento: </strong>
+<%=@director.birth_date%><br>
+
+<strong>Nacionalidade: </strong>
+<%=@director.nationality%><br>
+
+<strong>Gênero favorito: </strong>
+<%=@director.genre.name %><br>
+
+<br>
+<div style="display: inline-block; margin-right: 10px;">
+  <%= button_to 'Editar', edit_director_path(@director), method: :get %>
+</div>
+<div style="display: inline-block;">
+  <%= button_to 'Apagar', director_path(@director), method: :delete %>
+</div><br><br>
+
+Filmes deste diretor:
+<br>
+<% @movies.each do |movie|  %>
+<%= link_to "#{movie.title} (#{movie.release_year})", movie %><br>
+<%end%>

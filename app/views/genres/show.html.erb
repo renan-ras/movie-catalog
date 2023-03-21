@@ -1,0 +1,28 @@
+<strong>Gênero: </strong>
+<%= @genre.name %><br>
+
+<br>
+<%#= button_to 'Editar', edit_genre_path(@genre), method: :get %>
+
+<%#= button_to 'Apagar', genre_path(@genre), method: :delete %>
+<%#= link_to 'Apagar', genre_path(@genre), method: :delete, data: { confirm: 'Quer apagar este registro?' } %>
+
+<div style="display: inline-block; margin-right: 10px;">
+  <%= button_to 'Editar', edit_genre_path(@genre), method: :get %>
+</div>
+<div style="display: inline-block;">
+  <%= button_to 'Apagar', genre_path(@genre), method: :delete %>
+</div>
+
+<%= link_to "Deletar", genre_path(@genre), data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "Tem certeza que deseja deletar ?"
+                            } %>
+
+<!-- Lista de todos os filmes deste gênero -->
+<br><br>
+Filmes deste gênero:
+<br>
+<% @movies.each do |movie|  %>
+<%= link_to "#{movie.title} (#{movie.release_year})", movie %><br>
+<%end%>
