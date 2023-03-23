@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   resources :movies do
     patch :publish, on: :member 
   end
+
+  get '/search', to: 'movies#search'
 end

@@ -20,7 +20,7 @@
 <%= @movie.genre.name %><br>
 
 <strong>Status: </strong>
-<%= @movie.status %><br>
+<%= @movie.status == 'published' ? 'Publicado' : 'Rascunho' %><br>
 
 <strong>Capa do filme: </strong><br>
 <% if @movie.cover.attached? %>
@@ -32,17 +32,17 @@
 <% if @movie.draft? %>
   <% button_message = 'Publicar' %>
 <% else %>
-  <% button_message = 'Rascunhar' %>
+  <% button_message = 'Despublicar' %>
 <% end %>
 
 <br>
 <div style="display: inline-block; margin-right: 10px;">
-  <%= button_to 'Editar', edit_movie_path(@movie), method: :get %>
+  <%= button_to 'Editar', edit_movie_path(@movie), method: :get, class: "btn btn-outline-secondary" %>
 </div>
 <div style="display: inline-block; margin-right: 10px;">
-  <%= button_to 'Apagar', movie_path(@movie), method: :delete %>
+  <%= button_to 'Apagar', @movie, method: :delete, data: { turbo_confirm: "Tem certeza que deseja deletar ?" }, class: "btn btn-outline-danger" %>
 </div>
 <div style="display: inline-block;">
-  <%= button_to button_message, publish_movie_path, {method: 'patch'} %>
+  <%= button_to button_message, publish_movie_path, method: 'patch', class: "btn btn-outline-success" %>
 </div>
 <br><br>

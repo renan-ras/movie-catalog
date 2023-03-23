@@ -16,16 +16,15 @@ class MoviesController < ApplicationController
     @movie = Movie.new(movie_params)
 
     if Movie.exists?(title: @movie.title, director_id: @movie.director_id)
-      flash.alert = 'Este filme já existe!'
-      return redirect_to new_movie_path
+      return redirect_to new_movie_path, danger: 'Este filme já existe!'
     end
   
     if @movie.save
-      flash.notice = 'Informações salvas com sucesso!'
       @movie.cover.attach(params[:movie][:cover]) if params[:movie][:cover]
-      return redirect_to @movie #new_movie_path
+      return redirect_to @movie, success: 'Informações salvas com sucesso!'
     end
 
+    flash.danger = 'Erro!'
     render :new
   end
 
@@ -40,10 +39,16 @@ class MoviesController < ApplicationController
 
     if @movie.update(movie_params)
       @movie.cover.attach(params[:movie][:cover]) if params[:movie][:cover]
-      return redirect_to @movie #movie_path(@movie.id)
+      return redirect_to @movie, success: 'Informações salvas com sucesso!'
     end
 
     render :edit
+  end
+
+  def destroy
+    movie = Movie.find(params[:id])
+    movie.destroy
+    redirect_to movies_path, success: 'Informações salvas com sucesso!'
   end
 
   def publish
@@ -54,8 +59,12 @@ class MoviesController < ApplicationController
     else
       movie.draft!
     end
-        
-    redirect_to movie_path(movie.id)
+
+    redirect_to movie, success: 'Informações salvas com sucesso!'
+  end
+
+  def search
+    @movies = Movie.where("title LIKE ?", "%" + params[:q] + "%")
   end
 
   private

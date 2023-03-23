@@ -1,12 +1,7 @@
 <h1>Registro de filme</h1>
 <br>
 
-<% flash.each do |type, message| %>
-  <div class="alert alert-<%= type %>">
-    <%= message %>
-  </div>
-<% end %>
-<br>
+
 
 <%= form_with model: movie do |f| %>
 

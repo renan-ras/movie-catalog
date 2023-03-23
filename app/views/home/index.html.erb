@@ -1,5 +1,55 @@
-<h1>Lista de filmes</h1>
+<h1>Lista de filmes publicados</h1>
 <br>
+<!--
 <% @movies.each do |movie|  %>
 <%= link_to "#{movie.title} (#{movie.release_year})", movie %><br>
 <%end%>
+-->
+<!--
+
+<div class="row">
+  <% @movies.each do |movie| %>
+    <div class="col-sm-3 mb-4">
+      <div class="card">
+        <% if movie.cover.attached? %>
+          <%= link_to image_tag(movie.cover, class: "card-img-top"), movie %>
+        <% else %>
+          <%= link_to image_tag(asset_path("placeholder.jpg"), class: "card-img-top"), movie %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= movie.title %></h5>
+          <p class="card-text"><%= movie.release_year %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+-->
+<!--
+width: 300px; 
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+<div class="row row-cols-1 row-cols-md-4 g-4">
+, style: "height: 400px;"
+, style: "height: 400px;"
+-->
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+
+  <% @movies.each do |movie| %>
+    <div class="col mb-4">
+      <div class="card h-100 d-flex flex-column">
+        <% if movie.cover.attached? %>
+          <%= link_to image_tag(movie.cover, class: "card-img-top flex-grow-1"), movie %>
+        <% else %>
+          <%= link_to image_tag(asset_path("placeholder.jpg"), class: "card-img-top flex-grow-1"), movie %>
+        <% end %>
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><%= movie.title %></h5>
+          <p class="card-text"><%= movie.release_year %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
