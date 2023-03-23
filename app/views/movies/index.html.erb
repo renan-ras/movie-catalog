@@ -1,0 +1,5 @@
+Todos os filmes cadastrados:
+<br>
+<% @movies.each do |movie|  %>
+<%= link_to "#{movie.title} (#{movie.release_year})", movie %><br>
+<%end%>
