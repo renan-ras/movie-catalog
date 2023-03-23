@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    @movies = Movie.published
     # @recipes = Recipe.all
 
     # @recipes = Recipe.published

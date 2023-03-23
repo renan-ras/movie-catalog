@@ -19,17 +19,30 @@
 <strong>Gênero favorito: </strong>
 <%= @movie.genre.name %><br>
 
+<strong>Status: </strong>
+<%= @movie.status %><br>
+
 <strong>Capa do filme: </strong><br>
-  <% if @movie.cover.attached? %>
-    <%= image_tag @movie.cover, style: "width: 200px; display: block" %>
-  <% else %>
-    <%= '(Imagem não existente)' %><br>
-  <% end %>
+<% if @movie.cover.attached? %>
+  <%= image_tag @movie.cover, style: "width: 200px; display: block" %>
+<% else %>
+  <%= '(Imagem não existente)' %><br>
+<% end %>
+
+<% if @movie.draft? %>
+  <% button_message = 'Publicar' %>
+<% else %>
+  <% button_message = 'Rascunhar' %>
+<% end %>
 
 <br>
 <div style="display: inline-block; margin-right: 10px;">
   <%= button_to 'Editar', edit_movie_path(@movie), method: :get %>
 </div>
-<div style="display: inline-block;">
+<div style="display: inline-block; margin-right: 10px;">
   <%= button_to 'Apagar', movie_path(@movie), method: :delete %>
-</div><br><br>
+</div>
+<div style="display: inline-block;">
+  <%= button_to button_message, publish_movie_path, {method: 'patch'} %>
+</div>
+<br><br>

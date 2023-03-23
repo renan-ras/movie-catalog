@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   resources :directors
 
-  resources :movies
+  resources :movies do
+    patch :publish, on: :member 
+  end
 end

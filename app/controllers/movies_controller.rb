@@ -1,4 +1,9 @@
 class MoviesController < ApplicationController
+  
+  def index
+    @movies = Movie.all
+  end
+  
   def show
     @movie = Movie.find(params[:id])
   end
@@ -41,7 +46,21 @@ class MoviesController < ApplicationController
     render :edit
   end
 
+  def publish
+    movie = Movie.find(params[:id])
+    
+    if movie.draft?
+      movie.published!
+    else
+      movie.draft!
+    end
+        
+    redirect_to movie_path(movie.id)
+  end
+
+  private
+
   def movie_params
-    params.require(:movie).permit(:title, :release_year, :synopsis, :origin_country, :duration, :director_id, :genre_id, :cover)
+    params.require(:movie).permit(:title, :release_year, :synopsis, :origin_country, :duration, :director_id, :genre_id, :cover, :status)
   end
 end

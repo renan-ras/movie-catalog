@@ -1,4 +1,8 @@
 class DirectorsController < ApplicationController
+  
+  def index
+  end
+  
   def show
     @director = Director.find(params[:id])
     @movies = @director.movies

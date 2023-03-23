@@ -1,4 +1,8 @@
 class GenresController < ApplicationController
+
+  def index
+  end
+
   def show
     @genre = Genre.find(params[:id])
     @movies = @genre.movies
