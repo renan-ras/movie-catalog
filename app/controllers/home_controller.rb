@@ -1,13 +1,15 @@
 class HomeController < ApplicationController
   def index
     @movies = Movie.published
-    # @recipes = Recipe.all
 
-    # @recipes = Recipe.published
+    if params[:filter] == 'released'
+      @movies = Movie.published.where("release_year <= ?", Time.now.year)
+    elsif params[:filter] == 'not_released'
+      @movies = Movie.published.where("release_year > ?", Time.now.year)
+    else
+      @movies = Movie.published
+    end
 
-    
-    # @recipes << Recipe.new(name: 'Pudim', recipe_type: 'Sobremesa')
-    # @recipes << Recipe.new(name: 'Macarronada', recipe_type: 'Prato principal')
   end
 
   # def draft

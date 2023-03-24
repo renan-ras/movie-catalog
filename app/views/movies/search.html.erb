@@ -1,5 +1,4 @@
-Filmes encontrados:
+<h2>Filmes encontrados:</h2>
 <br>
-<% @movies.each do |movie|  %>
-<%= link_to "#{movie.title} (#{movie.release_year})", movie %><br>
-<%end%>
+
+<%= render partial: '/home/coversgrid', locals: {movies: @movies} %>
