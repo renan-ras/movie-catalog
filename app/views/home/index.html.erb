@@ -1,16 +1,18 @@
 <h1>Lista de filmes publicados</h1>
 <div data-controller="form-element">
   <%= form_tag root_path, method: :get do %>
+
+    <% button_class = "btn btn-outline-dark" %>
     
-    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-      <%= radio_button_tag :filter, 'all', true, class: "btn-check", autocomplete: "off", id: "btnradio1", data: { action: "click->form-element#remotesubmit" } %>
-      <%= label_tag :filter_all, 'Todos', class: "btn btn-outline-primary", for: "btnradio1" %>
+    <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic radio toggle button group">
+      <%= radio_button_tag :filter, 'all', @radio_selection[0], class: "btn-check", autocomplete: "off", id: "btnradio1", data: { action: "click->form-element#remotesubmit" } %>
+      <%= label_tag :filter_all, 'Todos', class: button_class, for: "btnradio1" %>
 
-      <%= radio_button_tag :filter, 'released', false, class: "btn-check", autocomplete: "off", id: "btnradio2", data: { action: "click->form-element#remotesubmit" } %>
-      <%= label_tag :filter_recent, 'Lançados', class: "btn btn-outline-primary", for: "btnradio2" %>
+      <%= radio_button_tag :filter, 'released', @radio_selection[1], class: "btn-check", autocomplete: "off", id: "btnradio2", data: { action: "click->form-element#remotesubmit" } %>
+      <%= label_tag :filter_recent, 'Lançados', class: button_class, for: "btnradio2" %>
 
-      <%= radio_button_tag :filter, 'not_released', false, class: "btn-check", autocomplete: "off", id: "btnradio3", data: { action: "click->form-element#remotesubmit" } %>
-      <%= label_tag :filter_popular, 'Não lançados', class: "btn btn-outline-primary", for: "btnradio3" %>
+      <%= radio_button_tag :filter, 'not_released', @radio_selection[2], class: "btn-check", autocomplete: "off", id: "btnradio3", data: { action: "click->form-element#remotesubmit" } %>
+      <%= label_tag :filter_popular, 'Não lançados', class: button_class, for: "btnradio3" %>
     </div>
     <%= submit_tag 'Filtrar', data: { form_element_target: "submitbtn" } %>
     
